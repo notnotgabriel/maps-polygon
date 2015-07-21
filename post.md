@@ -35,7 +35,7 @@ var princiCoords = [
 ];
 ```
 
-Para demarcar a nossa área, usaremos o objeto Polygon, e para declará-lo basta fazer:
+Usaremos o objeto Polygon para demarcar a área, e para declará-lo basta fazer:
 
 ```
 var princiPolygon = new google.maps.Polygon({
