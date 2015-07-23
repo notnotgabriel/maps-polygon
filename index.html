@@ -29,7 +29,7 @@
     <strong>Estou na área? </strong> <br>
     <span id="resultado-mapa"></span>
     
-    <button id="bt-carregar" class="bt-carregar">Carregar novo endereço</button>
+    <button id="bt-carregar" class="bt-carregar">Carregar endereço</button>
   </div>
 
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=geometry"></script>
@@ -39,7 +39,7 @@
       var mapOptions = {
         zoom: 18,
         center: new google.maps.LatLng(-22.879698840442824, -47.056036956066926),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.SATELLITE 
       };
 
       var map = new google.maps.Map(document.getElementById('map'), mapOptions);

@@ -1,5 +1,8 @@
 # Objetivo: Mostrar como usar google maps polygon
 
+Links:
+[Post no blog da Princi Web](http://www.princiweb.com.br/blog/programacao/google-apis/google-maps-polygon.html)
+
 Salve galera!
 
 Hoje ensinarei a vocês como desenhar uma área poligonal em seu mapa, e de forma simples, mostrar se o usuário está dentro desta área delimitada.
@@ -74,7 +77,7 @@ Vamos criar uma função simples, que vai somente carregar novas coordenadas, si
 Criaremos também um botão para chamar esta função.
 
 ```
- function carregarNoMapa() {
+function carregarNoMapa() {
   var novoLocal = new google.maps.LatLng(-22.878735,-47.058499)
   map.setCenter(novoLocal);
 }
@@ -91,11 +94,10 @@ Agora falta verificarmos se o novo endereço está dentro do shape certo?
 Para "escutar" mudanças no mapa, utilizaremos o evento 'center_changed', que é disparado toda vez que o centro do mapa muda.
 
 ```
- google.maps.event.addListener(map, 'center_changed', function(){
+  google.maps.event.addListener(map, 'center_changed', function(){
     // Pega as coordenadas do centro do mapa e salva no array
     var coordsCentro = [map.getCenter().A, map.getCenter().F];
   });
-}   
 ```
 
 Lembram da biblioteca geometry que carregamos previamente na tag script?
