@@ -14,6 +14,9 @@
         height: 450px;
         margin: 40px auto;
       }
+      .bt-carregar{
+        float: right;
+      }
 
     </style>
   </head>
@@ -23,6 +26,10 @@
   <div class="container">
 
     <div id="map"></div>
+    <strong>Estou na área? </strong> <br>
+    <span id="resultado-mapa"></span>
+    
+    <button id="bt-carregar" class="bt-carregar">Carregar novo endereço</button>
   </div>
 
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=geometry"></script>
@@ -31,13 +38,13 @@
     function initialize() {
       var mapOptions = {
         zoom: 18,
-
         center: new google.maps.LatLng(-22.879698840442824, -47.056036956066926),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
 
-      var map = new google.maps.Map(document.getElementById('map'),
-          mapOptions);
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      var geocoder = new google.maps.Geocoder();
 
       var princiCoords = [
         new google.maps.LatLng(-22.878735,-47.058499),
@@ -65,19 +72,39 @@
         fillOpacity: 0.35
       });
 
+      // Insere o shape no mapa
       princiPolygon.setMap(map);
 
-      google.maps.event.addListener(map, 'bounds_changed', function(){
-        var estaNaArea = false;
+      function carregarNoMapa() {
+        var novoLocal = new google.maps.LatLng(-22.878735,-47.058499)
+        map.setCenter(novoLocal);
+      }
+
+      var bt = document.getElementById('bt-carregar');
+
+      bt.addEventListener('click', function(e) {
+        carregarNoMapa();
+      });
+
+      // Evento de alteração dos limites do mapa
+      google.maps.event.addListener(map, 'center_changed', function(){
         var coordsCentro = [map.getCenter().A, map.getCenter().F];
+        
+        var estaNaArea = false;
+        var resultado = document.getElementById('resultado-mapa');
 
         estaNaArea = google.maps.geometry.poly.containsLocation(new google.maps.LatLng(coordsCentro[0], coordsCentro[1]), princiPolygon);
 
-        console.log(estaNaArea);
+        if(estaNaArea){
+          resultado.innerHTML = 'Você <b>está</b> na área da Princi Web';
+        }
+        else{
+          resultado.innerHTML = 'Você <b>não está</b> na área da Princi Web';
+        }
 
       });
 
-    }
+    }   
 
     google.maps.event.addDomListener(window, 'load', initialize);
 
